@@ -10,7 +10,6 @@ public class Main {
 
         Subtask subtask1 = new Subtask("Собрать чемодан", "Упаковать вещи", epic1);
         Subtask subtask2 = new Subtask("Купить билеты", "Зайти на Aviasales", epic1);
-
         Subtask subtask3 = new Subtask("Провериться у окулиста", "Проверить зрение", epic2);
 
         taskManager.createTask(task1);
@@ -29,35 +28,5 @@ public class Main {
 
         System.out.println("\nПодзадачи:");
         taskManager.printAllSubtasks();
-
-        task1.setStatus(Task.TaskStatus.IN_PROGRESS);
-        task2.setStatus(Task.TaskStatus.DONE);
-        subtask1.setStatus(Task.TaskStatus.NEW);
-        subtask2.setStatus(Task.TaskStatus.IN_PROGRESS);
-        subtask3.setStatus(Task.TaskStatus.DONE);
-
-        System.out.println("\nОбновленные статусы:");
-
-        System.out.println("Задачи:");
-        taskManager.printAllTasks();
-
-        System.out.println("\nПодзадачи:");
-        taskManager.printAllSubtasks();
-
-        epic1.updateStatus();
-        epic2.updateStatus();
-
-        System.out.println("\nСтатусы эпиков:");
-        taskManager.printAllEpics();
-
-        taskManager.deleteTask(1);
-        taskManager.deleteEpic(2);
-
-        System.out.println("\nПосле удаления:");
-        System.out.println("Задачи:");
-        taskManager.printAllTasks();
-
-        System.out.println("\nЭпики:");
-        taskManager.printAllEpics();
     }
 }
