@@ -6,7 +6,7 @@ public class Main {
         Task task2 = new Task("Уборка дома", "Убраться на кухне");
 
         Epic epic1 = new Epic("Подготовка к отпуску", "Покупка авиабилетов");
-        Subtask subtask1 = new Subtask("Купить билеты", "Зайти на aviasales", epic1);
+        Subtask subtask1 = new Subtask("Купить билеты", "Зайти на aviasales", epic1.getId());
 
         taskManager.createTask(task1);
         taskManager.createTask(task2);

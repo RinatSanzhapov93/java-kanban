@@ -4,11 +4,6 @@ public class Task {
     private final String description;
     private TaskStatus status;
 
-    public enum TaskStatus {
-        NEW,
-        IN_PROGRESS,
-        DONE
-    }
 
     public Task(String title, String description) {
         this.title = title;

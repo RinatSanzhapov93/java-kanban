@@ -1,17 +1,17 @@
 public class Subtask extends Task {
-    private final Epic epic;
+    private final int epicId;
 
-    public Subtask(String title, String description, Epic epic) {
+    public Subtask(String title, String description, int epicId) {
         super(title, description);
-        this.epic = epic;
+        this.epicId = epicId;
     }
 
-    public Epic getEpic() {
-        return epic;
+    public int getEpicId() {
+        return epicId;
     }
 
     @Override
     public String toString() {
-        return super.toString() + ", epic=" + epic.getTitle();
+        return super.toString() + ", epicId=" + epicId;
     }
 }
