@@ -1,5 +1,5 @@
 public class Task {
-    private final int id;
+    private int id;
     private final String title;
     private final String description;
     private TaskStatus status;
@@ -10,8 +10,7 @@ public class Task {
         DONE
     }
 
-    public Task(int id, String title, String description) {
-        this.id = id;
+    public Task(String title, String description) {
         this.title = title;
         this.description = description;
         this.status = TaskStatus.NEW;
@@ -19,6 +18,10 @@ public class Task {
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {

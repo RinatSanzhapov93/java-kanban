@@ -4,8 +4,8 @@ import java.util.List;
 public class Epic extends Task {
     private final List<Subtask> subtasks;
 
-    public Epic(int id, String title, String description) {
-        super(id, title, description);
+    public Epic(String title, String description) {
+        super(title, description);
         this.subtasks = new ArrayList<>();
     }
 
@@ -31,18 +31,13 @@ public class Epic extends Task {
 
         boolean allDone = true;
         boolean anyInProgress = false;
-        boolean anyNew = false;
 
         for (Subtask subtask : subtasks) {
-            switch (subtask.getStatus()) {
-                case DONE:
-                    break;
-                case IN_PROGRESS:
-                    anyInProgress = true;
-                    break;
-                case NEW:
-                    anyNew = true;
-                    break;
+            if (subtask.getStatus() != TaskStatus.DONE) {
+                allDone = false;
+            }
+            if (subtask.getStatus() == TaskStatus.IN_PROGRESS) {
+                anyInProgress = true;
             }
         }
 
@@ -50,7 +45,7 @@ public class Epic extends Task {
             setStatus(TaskStatus.DONE);
         } else if (anyInProgress) {
             setStatus(TaskStatus.IN_PROGRESS);
-        } else if (anyNew) {
+        } else {
             setStatus(TaskStatus.NEW);
         }
     }
