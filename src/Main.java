@@ -1,29 +1,30 @@
 public class Main {
     public static void main(String[] args) {
-        TaskManager taskManager = new TaskManager();
+        TaskManager manager = Managers.getDefault();
 
-        Task task1 = new Task("Покупка продуктов", "Сходить в магазин");
-        Task task2 = new Task("Уборка дома", "Убраться на кухне");
+        Task task1 = new Task("Купить продукты", "Сходить в магазин");
+        int taskId1 = manager.createTask(task1);
 
-        Epic epic1 = new Epic("Подготовка к отпуску", "Покупка авиабилетов");
-        Subtask subtask1 = new Subtask("Купить билеты", "Зайти на aviasales", epic1.getId());
+        Epic epic1 = new Epic("Подготовка к отпуску", "Список дел перед отпуском");
+        int epicId1 = manager.createEpic(epic1);
 
-        taskManager.createTask(task1);
-        taskManager.createTask(task2);
-        taskManager.createEpic(epic1);
-        taskManager.createSubtask(subtask1);
+        Subtask subtask1 = new Subtask("Купить билеты", "Зайти на AviaSales", epicId1);
+        int subtaskId1 = manager.createSubtask(subtask1);
 
-        taskManager.printAllTasks();
-        taskManager.printAllEpics();
-        taskManager.printAllSubtasks();
+        System.out.println("Все задачи:");
+        manager.getAllTasks().forEach(System.out::println);
 
-        System.out.println("Все подзадачи эпика 1:");
-        for (Subtask subtask : taskManager.getSubtasksByEpicId(1)) {
-            System.out.println(subtask);
-        }
+        System.out.println("\nВсе эпики:");
+        manager.getAllEpics().forEach(System.out::println);
 
-        taskManager.deleteAllTasks();
-        taskManager.deleteAllEpics();
-        taskManager.deleteAllSubtasks();
+        System.out.println("\nВсе подзадачи:");
+        manager.getAllSubtasks().forEach(System.out::println);
+
+        manager.getTask(taskId1);
+        manager.getEpic(epicId1);
+        manager.getSubtask(subtaskId1);
+
+        System.out.println("\nИстория просмотров:");
+        manager.getHistory().forEach(System.out::println);
     }
 }
