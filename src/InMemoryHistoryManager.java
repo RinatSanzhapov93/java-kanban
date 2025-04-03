@@ -1,8 +1,11 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 public class InMemoryHistoryManager implements HistoryManager {
     private static final int MAX_HISTORY_SIZE = 10;
-    private final LinkedList<Task> history = new LinkedList<>();
+    private final List<Task> history = new LinkedList<>();
 
     @Override
     public void add(Task task) {
@@ -10,18 +13,10 @@ public class InMemoryHistoryManager implements HistoryManager {
             return;
         }
 
-        Iterator<Task> iterator = history.iterator();
-        while (iterator.hasNext()) {
-            Task existingTask = iterator.next();
-            if (existingTask.equals(task)) {
-                iterator.remove();
-                break;
-            }
-        }
-        history.addLast(task);
+        history.add(task);
 
         if (history.size() > MAX_HISTORY_SIZE) {
-            history.removeFirst();
+            history.remove(0);
         }
     }
 
@@ -32,6 +27,7 @@ public class InMemoryHistoryManager implements HistoryManager {
             Task task = iterator.next();
             if (task.getId() == id) {
                 iterator.remove();
+                break;
             }
         }
     }

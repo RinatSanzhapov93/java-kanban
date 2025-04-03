@@ -4,34 +4,24 @@ import static org.junit.jupiter.api.Assertions.*;
 class SubtaskTest {
     @Test
     void testCannotBeItsOwnEpicOnCreation() {
-        boolean exceptionThrown = false;
-        String message = "";
+        Task temp = new Task("Temp", "Temp");
+        temp.setId(1);
 
-        try {
-            Task temp = new Task("Temp", "Temp");
-            temp.setId(1);
-            new Subtask("Invalid", "Desc", 1).setId(1);
-        } catch (IllegalArgumentException e) {
-            exceptionThrown = true;
-            message = e.getMessage();
-        }
-
-        assertTrue(exceptionThrown);
-        assertEquals("Нельзя установить ID подзадачи равным ID эпика", message);
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> {
+                    new Subtask("Invalid", "Desc", 1).setId(1);
+                }
+        );
+        assertEquals("Нельзя установить ID подзадачи равным ID эпика", exception.getMessage());
     }
 
     @Test
     void testNormalSubtaskCreation() {
-        boolean exceptionThrown = false;
-
-        try {
+        assertDoesNotThrow(() -> {
             Subtask subtask = new Subtask("Valid", "Desc", 1);
             subtask.setId(2);
-        } catch (IllegalArgumentException e) {
-            exceptionThrown = true;
-        }
-
-        assertFalse(exceptionThrown);
+        });
     }
 
     @Test
